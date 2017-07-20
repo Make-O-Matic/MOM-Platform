@@ -1,0 +1,62 @@
+<!--
+  Copyright (c) 2016-2017 Enproduktion GmbH & Laber's Lab e.U. (FN 394440i, Austria)
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+-->
+
+<section class="devices">
+    <h2 class="devices__title">
+        Devices
+    </h2>
+    <div class="devices__new">
+        {% if session.username %}
+            <h3 class="devices__new__title">Add New Device</h3>
+            <form class="devices__new__add-device"
+                  action="{{ url_for('add_device') }}"
+                  method="post">
+                <dl>
+                    <dt>Title:</dt>
+                    <dd><input type="text" size="50" name="title"></dd>
+                    <dt>Tags:</dt>
+                    <dd><input type="text" size="50" name="tags"></dd>
+                    <dt>Text:</dt>
+                    <dd><textarea name="text" rows="7" cols="50"></textarea></dd>
+                </dl>
+
+                <input type="submit" value="Share">
+            </form>
+        {% endif %}
+    </div>
+
+    <ul class="devices__list">
+        <h3 class="devices__list__title">All Devices</h3>
+        {% for row in devices %}
+            <li>
+                <b>{{ row.device.title }}</b>
+                {% if request.path == "/" %}
+                    by <a href="{{ url_for('profile', username=row.username) }}">{{ row.username }}</a>
+                {% endif %}
+                added on {{ row.device.date }}
+                <i>{{ ", ".join(row.tags) }}</i><br>
+                {{ row.device.text }}
+    {% else %}
+        <li class="devices__no-device">No device so far, please add one!</li>
+    {% endfor %}
+    </ul>
+</section>

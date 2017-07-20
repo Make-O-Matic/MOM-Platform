@@ -1,0 +1,43 @@
+# Copyright (c) 2016-2017 Enproduktion GmbH & Laber's Lab e.U. (FN 394440i, Austria)
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+vhosts:
+  - {fqdn: "jupyter.make-o-matic.io",
+     port: "8888",
+     auth: false}
+  - {fqdn: "kibana.make-o-matic.io",
+     port: "5601",
+     auth: true}
+  - {fqdn: "s3.make-o-matic.io",
+     port: "9000",
+     auth: false}
+  - {fqdn: "spark.make-o-matic.io",
+     port: "8080",
+     auth: true}
+  - {fqdn: "platform.make-o-matic.io",
+     port: "5000",
+     auth: false}
+  - {fqdn: "manage.make-o-matic.io",
+     port: "9090",
+     auth: false}
+
+htpasswd:
+  - {name: "mom",
+     password: "$apr1$qvR0cM.u$Xl2VSanzcKzknL2WWVeHA1"}

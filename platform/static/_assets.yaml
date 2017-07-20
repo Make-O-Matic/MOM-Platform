@@ -1,0 +1,15 @@
+# Disabled, due to test issues
+#
+#sass:
+#    filters: pyscss
+#    output: compiled/sass.css
+#    contents:
+#        - scss/layout.scss
+#        - scss/index.scss
+#        - scss/devices.scss
+#
+#bootstrap:
+#    output: compiled/bootstrap.css
+#    contents:
+#        - vendor/bootstrap/bootstrap.min.css
+#        - vendor/bootstrap/bootstrap-theme.min.css

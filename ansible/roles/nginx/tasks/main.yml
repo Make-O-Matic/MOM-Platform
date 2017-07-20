@@ -1,0 +1,102 @@
+# Copyright (c) 2016-2017 Enproduktion GmbH & Laber's Lab e.U. (FN 394440i, Austria)
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+- name: Add nginx repository
+  template:
+    src: nginx.repo.j2
+    dest: /etc/yum.repos.d/nginx.repo
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Install nginx
+  yum:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Check for dhparam
+  stat: path=/etc/nginx/dh_4096.pem
+  register: dhparam
+
+- name: Create dhparam
+  command: openssl dhparam -out /etc/nginx/dh_4096.pem -2 4096
+  when: dhparam.stat.exists == False
+
+- name: Copy TLS config from template
+  template: src=ssl.conf.j2 dest=/etc/nginx/ssl.conf owner=root group=root mode=0644
+
+- name: Install httpd-tools for authentication support
+  yum:
+    name: httpd-tools
+    state: present
+
+- name: Install passlib
+  pip:
+    name: passlib
+    state: present
+
+- name: Create .htpasswd
+  htpasswd:
+    path: /etc/nginx/.htpasswd
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    crypt_scheme: plaintext
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - "{{ htpasswd }}"
+
+- name: Generate nginx vhosts
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/conf.d/{{ item.fqdn }}.conf
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - "{{ vhosts }}"
+
+# WIP:
+# - name: Generate nginx interface list
+#   template:
+#     src: default_index.html.j2
+#     dest: /usr/share/nginx/html/index.html
+#     owner: root
+#     group: root
+#     mode: 0644
+
+- name: Restart nginx
+  systemd:
+    name: nginx
+    enabled: true
+    state: restarted
+
+- name: Allow http and https
+  firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+    zone: public
+    immediate: yes
+  with_items:
+    - http
+    - https

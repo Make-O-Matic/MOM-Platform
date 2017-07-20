@@ -1,0 +1,17 @@
+# Ignore OS related files
+.DS_Store
+
+# Ignore ansible temp files
+ansible/*.retry
+
+# Ignore Compiled
+*.pyc
+docs/_build
+platform/static/compiled
+
+# Ignore caches
+__pycache__
+platform/static/.webassets-cache
+
+# Ignore temp files
+platform/temp
