@@ -23,7 +23,7 @@ DOC_DIR          = docs
 UNITTEST         = python -m unittest
 UNITTEST_VERBOSE = python -m unittest -v
 
-ANSIBLE          = ansible-playbook -i production --ask-vault-pass
+ANSIBLE          = cd ansible; ansible-playbook -i production --ask-vault-pass
 
 .PHONY: tu
 tu:
@@ -57,12 +57,13 @@ clean-docs:
 
 .PHONY: provision
 provision:
-	$(ANSIBLE) ansible/mom.yml
+	$(ANSIBLE) mom.yml
 
 .PHONY: update-nginx
-provision:
-	$(ANSIBLE) ansible/update_nginx.yml
+update-nginx:
+	$(ANSIBLE) update_nginx.yml
 
 .PHONY: update-platform
-provision:
-	$(ANSIBLE) ansible/update_platform.yml
+update-platform:
+	$(ANSIBLE) update_platform.yml
+
