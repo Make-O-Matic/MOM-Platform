@@ -35,6 +35,7 @@
     - mom
     - efk
     - jupyter
+    - sync_notebooks
     - platform
     - tls
     - nginx

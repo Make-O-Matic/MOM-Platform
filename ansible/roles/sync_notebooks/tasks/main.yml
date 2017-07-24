@@ -18,37 +18,20 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-- name: Create jupyter directory
-  file:
-    path: ~/.mom/jupyter
-    state: directory
-    mode: 0777
-
-- name: Create s3 directory
-  file:
-    path: ~/.mom/s3
-    state: directory
-    mode: 0777
-
-- name: Create worker01 directory
-  file:
-    path: ~/.mom/spark/worker1
-    state: directory
-    mode: 0777
-
-- name: Synchronize jupyter dockerstack
+- name: Synchronize jupyter notebooks
   synchronize:
-    src: ../docker/mom-jupyter
-    dest: /mom/
-
-- name: Start jupyter stack
-  docker_service:
-    project_src: /mom/mom-jupyter
-    state: present
-
-# - name: Add jupyter firewall rule
-#   firewalld:
-#     port: 8888/tcp
-#     permanent: true
-#     state: enabled
-#     immediate: yes
+    src: ../notebooks
+    dest: ~/.mom/jupyter
+- name: Change ownership of notebooks
+  file:
+    path: ~/.mom/jupyter/notebooks
+    recurse: yes
+    group: root
+    owner: root
+    mode: 0666
+- name: Change ownership of parent folder
+  file:
+    path: ~/.mom/jupyter/notebooks
+    group: root
+    owner: root
+    mode: 0755

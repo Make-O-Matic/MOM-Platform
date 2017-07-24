@@ -24,6 +24,7 @@ UNITTEST         = python -m unittest
 UNITTEST_VERBOSE = python -m unittest -v
 
 ANSIBLE          = cd ansible; ansible-playbook -i production --ask-vault-pass
+ANSIBLE_NP       = cd ansible; ansible-playbook -i production
 
 .PHONY: tu
 tu:
@@ -67,3 +68,6 @@ update-nginx:
 update-platform:
 	$(ANSIBLE) update_platform.yml
 
+.PHONY: update-notebooks
+update-notebooks:
+	$(ANSIBLE_NP) update_notebooks.yml
