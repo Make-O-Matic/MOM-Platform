@@ -19,25 +19,22 @@
 # SOFTWARE.
 
 vhosts:
-  - {fqdn: "jupyter.make-o-matic.io",
-     port: "8888",
-     auth: false}
-  - {fqdn: "kibana.make-o-matic.io",
-     port: "5601",
-     auth: true}
-  - {fqdn: "s3.make-o-matic.io",
-     port: "9000",
-     auth: false}
-  - {fqdn: "spark.make-o-matic.io",
-     port: "8080",
-     auth: true}
-  - {fqdn: "platform.make-o-matic.io",
-     port: "5000",
-     auth: false}
-  - {fqdn: "manage.make-o-matic.io",
-     port: "9090",
-     auth: false}
+  - fqdn: "kibana.make-o-matic.io"
+    port: "5601"
+    auth: true
+  - fqdn: "s3.make-o-matic.io"
+    port: "9000"
+    auth: false
+  - fqdn: "spark.make-o-matic.io"
+    port: "8080"
+    auth: true
+  - fqdn: "platform.make-o-matic.io"
+    port: "5000"
+    auth: false
+  - fqdn: "manage.make-o-matic.io"
+    port: "9090"
+    auth: false
 
 htpasswd:
-  - {name: "mom",
-     password: "$apr1$qvR0cM.u$Xl2VSanzcKzknL2WWVeHA1"}
+  - name: "mom"
+    password: "$apr1$qvR0cM.u$Xl2VSanzcKzknL2WWVeHA1"
