@@ -22,16 +22,9 @@
   synchronize:
     src: ../notebooks
     dest: ~/.mom/jupyter
-- name: Change ownership of notebooks
-  file:
-    path: ~/.mom/jupyter/notebooks
-    recurse: yes
-    group: root
-    owner: root
-    mode: 0666
 - name: Change ownership of parent folder
   file:
     path: ~/.mom/jupyter/notebooks
     group: root
     owner: root
-    mode: 0755
+    mode: 0777
