@@ -18,60 +18,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-DOC_DIR          = docs
+- hosts: all
 
-UNITTEST         = python -m unittest
-UNITTEST_VERBOSE = python -m unittest -v
+  remote_user: root
 
-ANSIBLE          = cd ansible; ansible-playbook -i production --ask-vault-pass
-ANSIBLE_NP       = cd ansible; ansible-playbook -i production
-
-.PHONY: tu
-tu:
-	$(UNITTEST) tests.router
-	$(UNITTEST) tests.views
-	$(UNITTEST) tests.models
-
-.PHONY: tuv
-tuv:
-	$(UNITTEST_VERBOSE) tests.router
-	$(UNITTEST_VERBOSE) tests.views
-	$(UNITTEST_VERBOSE) tests.models
-
-
-.PHONY: tf
-tf:
-	$(UNITTEST) functional_tests.py
-
-.PHONY: tfv
-tfv:
-	$(UNITTEST_VERBOSE) functional_tests.py
-
-.PHONY: docs
-docs:
-	sphinx-apidoc -o docs/modules platform/views
-	$(MAKE) -C $(DOC_DIR) html
-
-.PHONY: clean-docs
-clean-docs:
-	$(MAKE) -C $(DOC_DIR) clean
-
-.PHONY: provision
-provision:
-	$(ANSIBLE) mom.yml
-
-.PHONY: update-nginx
-update-nginx:
-	$(ANSIBLE) update_nginx.yml
-
-.PHONY: update-platform
-update-platform:
-	$(ANSIBLE) update_platform.yml
-
-.PHONY: update-notebooks
-update-notebooks:
-	$(ANSIBLE_NP) update_notebooks.yml
-
-.PHONY: update-jupyter
-update-jupyter:
-	$(ANSIBLE_NP) update_jupyter.yml
+  tasks:
+    - name: Update and restart jupyter stack
+      docker_service:
+        project_src: /mom/mom-jupyter
+        state: present
+        pull: yes
+        restarted: yes

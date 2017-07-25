@@ -81,8 +81,11 @@ Makefile Commands
     make clean-docs # cleans the docs
 
     make provision # run mom.yml ansible on production server
+
     make update-nginx # update nginx conf on production server
     make update-platform # update flask application on production server
+    make update-notebooks # update jupyter notebooks
+    make update-jupyter # update jupyter stack
 
 
 Documentation
