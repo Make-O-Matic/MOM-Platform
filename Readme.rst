@@ -88,6 +88,13 @@ Makefile Commands
     make update-jupyter # update jupyter stack
 
 
+Update and install new jupyter packages
+---------------------------------------
+
+1. Adapt docker/mom-jupyter/Dockerfile
+2. Run make update-jupyter
+
+
 Edit mongodb rules
 ------------------
 

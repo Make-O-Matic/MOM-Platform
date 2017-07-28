@@ -23,9 +23,15 @@
   remote_user: root
 
   tasks:
+    - name: Synchronize jupyter dockerstack
+      synchronize:
+        src: ../docker/mom-jupyter
+        dest: /mom/
+
     - name: Update and restart jupyter stack
       docker_service:
         project_src: /mom/mom-jupyter
         state: present
+        build: yes
         pull: yes
         restarted: yes
