@@ -18,25 +18,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-- hosts: all
+FROM makeomaticio/jupyter-pyspark
 
-  pre_tasks:
-    - name: install apt-transport-https
-      raw: yum -y install python-firewall
+MAINTAINER Make-O-Matic <hello@make-o-matic.io>
 
-  remote_user: root
+RUN pip2 install pymongo \
+ && pip3 install pymongo
 
-  roles:
-    - basic
-    - time
-    - firewalld
-    - cockpit
-    - docker
-    - mom
-    - efk
-    - jupyter
-    - sync_notebooks
-    - mongo
-    - platform
-    - tls
-    - nginx
+USER $NB_USER

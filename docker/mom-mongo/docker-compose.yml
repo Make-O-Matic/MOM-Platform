@@ -26,12 +26,15 @@ services:
       - 27017:27017
     volumes:
       - ~/.mom/mongodb:/data/db
-    env_file:
-      - mongo.env
-    # env file consists of following variables:
+    # Following does not work:
     # environment:
     #  MONGO_INITDB_ROOT_USERNAME: ""
     #  MONGO_INITDB_ROOT_PASSWORD: ""
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: mongo.public
 
 networks:
   default:

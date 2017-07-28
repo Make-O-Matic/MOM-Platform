@@ -27,6 +27,7 @@ version: '2'
 services:
 
   spark-master:
+    build: .
     image: makeomaticio/jupyter-pyspark
     ports:
       - 7077:7077
@@ -40,6 +41,7 @@ services:
         tag: spark.master
 
   jupyter:
+    build: .
     image: makeomaticio/jupyter-pyspark
     ports:
       - 8888:8888
@@ -73,6 +75,7 @@ services:
         tag: s3
 
   spark-worker1:
+    build: .
     image: makeomaticio/jupyter-pyspark
     volumes:
       - ~/.mom/spark/worker1:/scratch

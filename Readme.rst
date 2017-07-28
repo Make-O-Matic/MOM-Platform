@@ -88,6 +88,27 @@ Makefile Commands
     make update-jupyter # update jupyter stack
 
 
+Edit mongodb rules
+------------------
+
+.. code-block:: bash
+
+    ssh your-ip-here
+    docker exec -ti ....
+    mongo
+
+    use test
+    db.createUser(
+      {
+	user: "",
+	pwd: "",
+	roles: [
+	   { role: "readWrite", db: "test" }
+	]
+      }
+    )
+
+
 Documentation
 -------------
 
