@@ -35,6 +35,21 @@ services:
       options:
         fluentd-address: localhost:24224
         tag: mongo.public
+  mongodb-private:
+    image: mongo:3.4
+    ports:
+      - 27017
+    volumes:
+      - ~/.mom/mongodb_private:/data/db
+    # Following does not work:
+    # environment:
+    #  MONGO_INITDB_ROOT_USERNAME: ""
+    #  MONGO_INITDB_ROOT_PASSWORD: ""
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: mongo.private
 
 networks:
   default:

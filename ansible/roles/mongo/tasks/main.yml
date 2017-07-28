@@ -24,6 +24,12 @@
     state: directory
     mode: 0777
 
+- name: Create mongo-private directory
+  file:
+    path: ~/.mom/mongodb_private
+    state: directory
+    mode: 0777
+
 - name: Synchronize mongo dockerstack
   synchronize:
     src: ../docker/mom-mongo
