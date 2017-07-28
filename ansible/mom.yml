@@ -34,9 +34,10 @@
     - docker
     - mom
     - efk
+    - nginx_install
     - jupyter
     - sync_notebooks
     - mongo
     - platform
     - tls
-    - nginx
+    - nginx_config

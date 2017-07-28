@@ -18,20 +18,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-- name: Add nginx repository
-  template:
-    src: nginx.repo.j2
-    dest: /etc/yum.repos.d/nginx.repo
-    owner: root
-    group: root
-    mode: 0644
-
-- name: Install nginx
-  yum:
-    name: nginx
-    state: present
-    update_cache: yes
-
 - name: Check for dhparam
   stat: path=/etc/nginx/dh_4096.pem
   register: dhparam
