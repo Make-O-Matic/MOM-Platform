@@ -79,3 +79,7 @@ update-jupyter:
 .PHONY: update-mongo
 update-mongo:
 	$(ANSIBLE_NP) update_mongo.yml
+
+.PHONY: update-neo4j
+update-neo4j:
+	$(ANSIBLE_NP) update_neo4j.yml

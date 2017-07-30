@@ -20,25 +20,7 @@
 
 - hosts: all
 
-  pre_tasks:
-    - name: install apt-transport-https
-      raw: yum -y install python-firewall
-
   remote_user: root
 
   roles:
-    - basic
-    - time
-    - firewalld
-    - cockpit
-    - docker
-    - mom
-    - efk
-    - nginx_install
-    - jupyter
-    - sync_notebooks
-    - platform
-    - mongo
     - neo4j
-    - tls
-    - nginx_config

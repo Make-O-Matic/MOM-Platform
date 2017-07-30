@@ -39,6 +39,8 @@ MOM Platform depends on following docker images:
 
 - `makeomaticio/jupyter-pyspark <https://hub.docker.com/r/makeomaticio/jupyter-pyspark/>`_
 
+Most of the make tasks require ansible to run.
+
 
 Run MoM Platform flask application locally
 ---------------------------------
@@ -86,6 +88,7 @@ Makefile Commands
     make update-platform # update flask application on production server
     make update-notebooks # update jupyter notebooks
     make update-jupyter # update jupyter stack
+    make update-neo4j # update neo4j stack
 
 
 Update and install new jupyter packages

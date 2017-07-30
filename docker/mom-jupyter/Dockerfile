@@ -25,4 +25,7 @@ MAINTAINER Make-O-Matic <hello@make-o-matic.io>
 RUN pip2 install pymongo \
  && pip3 install pymongo
 
+RUN pip2 install py2neo \
+ && pip3 install py2neo
+
 USER $NB_USER

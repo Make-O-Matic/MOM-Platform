@@ -18,27 +18,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-- hosts: all
+- name: Create neo4j public directory
+  file:
+    path: ~/.mom/platform/neo4j_public
+    state: directory
+    mode: 0777
 
-  pre_tasks:
-    - name: install apt-transport-https
-      raw: yum -y install python-firewall
+- name: Synchronize neo4j public stack
+  synchronize:
+    src: ../docker/mom-neo4j
+    dest: /mom/
 
-  remote_user: root
-
-  roles:
-    - basic
-    - time
-    - firewalld
-    - cockpit
-    - docker
-    - mom
-    - efk
-    - nginx_install
-    - jupyter
-    - sync_notebooks
-    - platform
-    - mongo
-    - neo4j
-    - tls
-    - nginx_config
+- name: Update and restart neo4j public stack
+  docker_service:
+    project_src: /mom/mom-neo4j
+    pull: yes
+    restarted: yes

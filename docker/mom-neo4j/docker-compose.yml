@@ -18,27 +18,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-- hosts: all
+version: '2'
+services:
+  neo4j-public:
+    image: neo4j:3.0
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - ~/.mom/platform/neo4j_public:/data
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: neo4j.public
 
-  pre_tasks:
-    - name: install apt-transport-https
-      raw: yum -y install python-firewall
-
-  remote_user: root
-
-  roles:
-    - basic
-    - time
-    - firewalld
-    - cockpit
-    - docker
-    - mom
-    - efk
-    - nginx_install
-    - jupyter
-    - sync_notebooks
-    - platform
-    - mongo
-    - neo4j
-    - tls
-    - nginx_config
+networks:
+  default:
+    external:
+      name: mom
