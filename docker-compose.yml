@@ -23,8 +23,8 @@ services:
   neo4j:
     image: neo4j:3.0
     ports:
-      - 7474:7474
-      - 7687:7687
+      - 7474
+      - 7687
     volumes:
       - ~/.mom/platform/neo4j:/data
     environment:
@@ -37,8 +37,8 @@ services:
   neo4j-test:
      image: neo4j:3.0
      ports:
-       - 7575:7575
-       - 7787:7787
+       - 7575
+       - 7787
      environment:
        - NEO4J_AUTH=none
      logging:
