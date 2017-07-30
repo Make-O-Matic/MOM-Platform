@@ -35,7 +35,9 @@
     src: ../docker/mom-mongo
     dest: /mom/
 
-- name: Start mongo stack
+- name: Update and restart mongo stack
   docker_service:
     project_src: /mom/mom-mongo
     state: present
+    pull: yes
+    restarted: yes

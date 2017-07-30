@@ -88,6 +88,7 @@ Makefile Commands
     make update-platform # update flask application on production server
     make update-notebooks # update jupyter notebooks
     make update-jupyter # update jupyter stack
+    make update-mongo # update mongo stack
     make update-neo4j # update neo4j stack
 
 

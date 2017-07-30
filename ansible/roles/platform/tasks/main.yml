@@ -32,6 +32,7 @@
 - name: Start platform stack
   docker_service:
     build: yes
+    restarted: yes
     project_src: /mom/mom-platform
     state: present
 
