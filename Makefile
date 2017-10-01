@@ -74,7 +74,7 @@ update-notebooks:
 
 .PHONY: update-jupyter
 update-jupyter:
-	$(ANSIBLE_NP) update_jupyter.yml
+	$(ANSIBLE) update_jupyter.yml
 
 .PHONY: update-mongo
 update-mongo:

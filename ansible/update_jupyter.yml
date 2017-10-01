@@ -28,6 +28,11 @@
         src: ../docker/mom-jupyter
         dest: /mom/
 
+    - name: Add and decrypt s3 env file
+      copy:
+        src: ../docker/mom-jupyter/s3.env
+        dest: /mom/mom-jupyter/s3.env
+
     - name: Update and restart jupyter stack
       docker_service:
         project_src: /mom/mom-jupyter
