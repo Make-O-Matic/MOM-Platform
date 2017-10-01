@@ -26,10 +26,8 @@ services:
       - 27017:27017
     volumes:
       - ~/.mom/mongodb:/data/db
-    # Following does not work:
-    # environment:
-    #  MONGO_INITDB_ROOT_USERNAME: ""
-    #  MONGO_INITDB_ROOT_PASSWORD: ""
+    env_file:
+      - mongo.env
     logging:
       driver: "fluentd"
       options:
@@ -41,10 +39,8 @@ services:
       - 27017
     volumes:
       - ~/.mom/mongodb_private:/data/db
-    # Following does not work:
-    # environment:
-    #  MONGO_INITDB_ROOT_USERNAME: ""
-    #  MONGO_INITDB_ROOT_PASSWORD: ""
+    env_file:
+      - mongo.env
     logging:
       driver: "fluentd"
       options:

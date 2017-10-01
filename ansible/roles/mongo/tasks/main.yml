@@ -35,6 +35,11 @@
     src: ../docker/mom-mongo
     dest: /mom/
 
+- name: Add and decrypt mongo env file
+  copy:
+    src: ../docker/mom-mongo/mongo.env
+    dest: /mom/mom-mongo/mongo.env
+
 - name: Update and restart mongo stack
   docker_service:
     project_src: /mom/mom-mongo
